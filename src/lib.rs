@@ -121,7 +121,11 @@ impl BundleSource {
             hasher.update(b"\x00");
             hasher.update(&bytes);
         }
-        Ok(format!("{:x}", hasher.finalize()))
+        Ok(hasher
+            .finalize()
+            .iter()
+            .map(|b| format!("{b:02x}"))
+            .collect())
     }
 }
 
